@@ -9,14 +9,16 @@ const App = () => {
 
   useEffect(() => {
     getDataPoints();
-    console.log();
     // eslint-disable-next-line
   }, []);
 
   return (
     <Fragment>
-      {datapoints.map((point) => (
-        <h1 key={point}>{point}</h1>
+      {datapoints.map((datapoint) => (
+        <h2>
+          {datapoint.emotion}
+          <br />
+        </h2>
       ))}
     </Fragment>
   );

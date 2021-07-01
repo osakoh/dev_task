@@ -2,6 +2,7 @@ import React, { useReducer } from "react";
 import dataReducer from "./dataReducer";
 import dataContext from "./dataContext";
 import { DISPLAY_DATAPOINTS } from "./types";
+import axios from "axios";
 
 // destructure children from props
 const DataState = ({ children }) => {
@@ -14,10 +15,17 @@ const DataState = ({ children }) => {
   const [state, dispatch] = useReducer(dataReducer, initialState);
 
   // function
-  const getDataPoints = () => {
-    const res = [1, "hello", 5, 6];
+  const getDataPoints = async () => {
+    const res = await axios("data.json");
 
-    dispatch({ type: DISPLAY_DATAPOINTS, data: res });
+    try {
+      if (res.status === 200) {
+        dispatch({ type: DISPLAY_DATAPOINTS, data: res.data });
+      }
+    } catch (error) {
+      // log errors in node console
+      console.error(error.message);
+    }
   };
 
   // return a provider
