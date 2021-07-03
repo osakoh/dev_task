@@ -57,34 +57,34 @@ const DataState = ({ children }) => {
     }
   };
 
-  // show different shape based on emotion type
-  //types: 'circle' | 'cross' | 'diamond' | 'square' | 'star' | 'triangle' | 'wye'
-
-  const showShape = (data) => {
+  // change color based on emotion type
+  // 'line' | 'plainline' | 'square' | 'rect' | 'circle' | 'cross' | 'diamond' | 'star' | 'triangle' | 'wye'
+  const changeShape = (data) => {
+    console.log(data);
     switch (data.emotion) {
       case "Alive":
-        return "circle";
+        return "line";
 
       case "Disappointed":
-        return "cross";
+        return "plainline";
 
       case "Cheerful":
-        return "diamond";
-
-      case "Motivated":
         return "square";
 
+      case "Motivated":
+        return "rect";
+
       case "Tense":
-        return "star";
+        return "circle";
 
       case "Kind":
-        return "triangle";
+        return "cross";
 
       case "Curious":
-        return "wye";
+        return "diamond";
 
       default:
-        return {};
+        return "#triangle";
     }
   };
 
@@ -98,11 +98,12 @@ const DataState = ({ children }) => {
         // functions
         getDataPoints,
         showColor,
-        showShape,
+        changeShape,
       }}
     >
       {/* wraps entire application */}
       {children}
+      {/* wraps entire application */}
     </dataContext.Provider>
   );
 };

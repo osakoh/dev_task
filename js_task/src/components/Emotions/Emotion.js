@@ -1,8 +1,7 @@
-import React, { useContext, PureComponent } from "react";
+import React, { useContext } from "react";
 import dataContext from "../context/dataContext";
 import classes from "./Emotion.module.css";
 import {
-  ResponsiveContainer,
   ScatterChart,
   Scatter,
   XAxis,
@@ -61,15 +60,14 @@ const Emotion = () => {
   };
 
   return (
-    // <ResponsiveContainer width='100%' height='100%'>
     <ScatterChart
       style={style}
-      width={725}
+      width={825}
       height={400}
       margin={{
         top: 20,
-        right: 100,
-        bottom: 20,
+        right: 60,
+        bottom: 0,
         left: 20,
       }}
     >
@@ -78,10 +76,9 @@ const Emotion = () => {
       <YAxis type='number' dataKey='Y' name='emotion' unit='' />
       {/* <Tooltip cursor={{ strokeDasharray: "3 3" }} /> */}
       <Tooltip content={<CustomTooltip />} />
-      <Legend />
+      <Legend align='left' verticalAlign='middle' layout='vertical' />
       {scatter}
     </ScatterChart>
-    // </ResponsiveContainer>
   );
 };
 
