@@ -1,11 +1,13 @@
-import React, { Fragment, useEffect, useContext } from "react";
-import loginContext from "./components/context/dataContext";
+import React, { useEffect, useContext } from "react";
+import Emotion from "./components/Emotions/Emotion";
+import dataContext from "./components/context/dataContext";
 
 const App = () => {
-  const ctx = useContext(loginContext);
+  // init dataContext
+  const ctx = useContext(dataContext);
 
   // destructure from context
-  const { datapoints, getDataPoints } = ctx;
+  const { getDataPoints } = ctx;
 
   useEffect(() => {
     getDataPoints();
@@ -13,14 +15,9 @@ const App = () => {
   }, []);
 
   return (
-    <Fragment>
-      {datapoints.map((datapoint) => (
-        <h2>
-          {datapoint.emotion}
-          <br />
-        </h2>
-      ))}
-    </Fragment>
+    <main>
+      <Emotion />
+    </main>
   );
 };
 

@@ -9,7 +9,6 @@ ReactDOM.render(
     <DataState>
       <App />
     </DataState>
-    ,
   </React.StrictMode>,
   document.getElementById("root")
 );
