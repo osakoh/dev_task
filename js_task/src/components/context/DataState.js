@@ -14,7 +14,7 @@ const DataState = ({ children }) => {
   // initialise useReducer
   const [state, dispatch] = useReducer(dataReducer, initialState);
 
-  // function
+  // get data from the json file in public folder
   const getDataPoints = async () => {
     const res = await axios("data.json");
 
@@ -28,6 +28,66 @@ const DataState = ({ children }) => {
     }
   };
 
+  // change color based on emotion type
+  const showColor = (data) => {
+    switch (data.emotion) {
+      case "Alive":
+        return "#15AA00";
+
+      case "Disappointed":
+        return "#959BE5";
+
+      case "Cheerful":
+        return "#A0DFA0";
+
+      case "Motivated":
+        return "#E6E500";
+
+      case "Tense":
+        return "#CA8A00";
+
+      case "Kind":
+        return "#BCE597";
+
+      case "Curious":
+        return "#FFA854";
+
+      default:
+        return "#edf6f9";
+    }
+  };
+
+  // show different shape based on emotion type
+  //types: 'circle' | 'cross' | 'diamond' | 'square' | 'star' | 'triangle' | 'wye'
+
+  const showShape = (data) => {
+    switch (data.emotion) {
+      case "Alive":
+        return "circle";
+
+      case "Disappointed":
+        return "cross";
+
+      case "Cheerful":
+        return "diamond";
+
+      case "Motivated":
+        return "square";
+
+      case "Tense":
+        return "star";
+
+      case "Kind":
+        return "triangle";
+
+      case "Curious":
+        return "wye";
+
+      default:
+        return {};
+    }
+  };
+
   // return a provider
   return (
     <dataContext.Provider
@@ -37,6 +97,8 @@ const DataState = ({ children }) => {
         datapoints: state.datapoints,
         // functions
         getDataPoints,
+        showColor,
+        showShape,
       }}
     >
       {/* wraps entire application */}

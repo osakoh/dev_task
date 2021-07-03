@@ -8,18 +8,39 @@ import {
   CartesianGrid,
   Tooltip,
   LabelList,
+  Legend,
+  Cell,
 } from "recharts";
 
 const Emotion = () => {
   // init dataContext
   const ctx = useContext(dataContext);
   // destructuring from context
-  const { datapoints } = ctx;
+  const { datapoints, showColor } = ctx;
+
+  // give each point/cell a different color
+  const cell = datapoints.map((point, index) => (
+    <Cell key={point.emotion_id} fill={showColor(point)} />
+  ));
+
+  // show the scatter plot and cell
+  const scatter = datapoints.map((datapoint) => (
+    <Scatter
+      key={datapoint.emotion_id}
+      name={datapoint.emotion}
+      data={datapoints}
+      fill={showColor(datapoint)}
+      shape='circle'
+    >
+      <LabelList dataKey='emotion' position='top' />
+      {cell}
+    </Scatter>
+  ));
 
   return (
     <ScatterChart
       style={style}
-      width={800}
+      width={930}
       height={600}
       margin={{
         top: 200,
@@ -32,9 +53,8 @@ const Emotion = () => {
       <XAxis type='number' dataKey='X' name='emotion' unit='' />
       <YAxis type='number' dataKey='Y' name='emotion' unit='' />
       <Tooltip cursor={{ strokeDasharray: "3 3" }} />
-      <Scatter name='A school' data={datapoints} fill='#8884d8'>
-        <LabelList dataKey='X' />
-      </Scatter>
+      <Legend />
+      {scatter}
     </ScatterChart>
   );
 };
