@@ -1,6 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, PureComponent } from "react";
 import dataContext from "../context/dataContext";
+import classes from "./Emotion.module.css";
 import {
+  ResponsiveContainer,
   ScatterChart,
   Scatter,
   XAxis,
@@ -19,7 +21,7 @@ const Emotion = () => {
   const { datapoints, showColor } = ctx;
 
   // give each point/cell a different color
-  const cell = datapoints.map((point, index) => (
+  const cell = datapoints.map((point) => (
     <Cell key={point.emotion_id} fill={showColor(point)} />
   ));
 
@@ -37,25 +39,49 @@ const Emotion = () => {
     </Scatter>
   ));
 
+  // custom tooltip
+  const CustomTooltip = ({ active, payload }) => {
+    if (active && payload && payload.length) {
+      // destructuring from payload
+      const { emotion, X, Y, log_count } = payload[0].payload;
+      return (
+        <div className={classes.card}>
+          <p className={classes.title}>{`Emotion: ${emotion}`}</p>
+          <p className={classes.desc}>
+            {`X: ${X}`}
+            <br />
+            {`Y: ${Y}`} <br />
+            {`Log count: ${log_count}`}
+          </p>
+        </div>
+      );
+    }
+
+    return null;
+  };
+
   return (
+    // <ResponsiveContainer width='100%' height='100%'>
     <ScatterChart
       style={style}
-      width={930}
-      height={600}
+      width={725}
+      height={400}
       margin={{
-        top: 200,
+        top: 20,
         right: 100,
         bottom: 20,
-        left: 200,
+        left: 20,
       }}
     >
       <CartesianGrid />
       <XAxis type='number' dataKey='X' name='emotion' unit='' />
       <YAxis type='number' dataKey='Y' name='emotion' unit='' />
-      <Tooltip cursor={{ strokeDasharray: "3 3" }} />
+      {/* <Tooltip cursor={{ strokeDasharray: "3 3" }} /> */}
+      <Tooltip content={<CustomTooltip />} />
       <Legend />
       {scatter}
     </ScatterChart>
+    // </ResponsiveContainer>
   );
 };
 
