@@ -7,13 +7,11 @@ There are index.html & script.js files, however feel free to use which ever fram
 
 The data.json file in this folder shows an example of how the data should look after manipulation of the initial anonoymised csv.
 
-# Getting Started with Create React App
+## Available Scripts:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### `npm install`
 
-## Available Scripts
-
-In the project directory, you can run:
+To install project dependency
 
 ### `npm start`
 
