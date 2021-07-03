@@ -46,7 +46,9 @@ def to_json(df, output_path):
         f.write(json_file)
     print('completed.....')
 
-# to_json(count_emotion(load_file(path, pd)), f'{path}/output/data.json')
+
+# export to json file
+to_json(count_emotion(load_file(path, pd)), f'{path}/output/data.json')
 
 # print(to_json.__doc__)
 # help(to_json)
