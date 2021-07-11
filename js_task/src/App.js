@@ -7,16 +7,19 @@ const App = () => {
   const ctx = useContext(dataContext);
 
   // destructure from context
-  const { getDataPoints } = ctx;
+  const { getDataPoints, datapoints } = ctx;
 
   useEffect(() => {
     getDataPoints();
+
+    // console.log(datapoints);
     // eslint-disable-next-line
   }, []);
 
   return (
     <main>
-      <Emotion />
+      {/* {datapoints.length > 1 && console.log(datapoints)} */}
+      {datapoints.length > 1 && <Emotion />}
     </main>
   );
 };
